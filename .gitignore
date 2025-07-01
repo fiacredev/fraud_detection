@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Environment variables
+.env
+
+# Model artifacts
+*.joblib
+
+# OS / IDE
+.DS_Store
+.idea/
+.vscode/
