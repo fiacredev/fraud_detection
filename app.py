@@ -25,3 +25,11 @@ def sample_transaction():
         "merch_lat": 40.2345,
         "merch_long": -75.2345
     }
+
+
+@app.post("/predict")
+def predict(data: dict):
+    return {
+        "is_fraud": 0,
+        "note": "model not wired up yet"
+    }
