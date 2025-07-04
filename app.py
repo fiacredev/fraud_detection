@@ -1,6 +1,10 @@
 from fastapi import FastAPI
+import joblib
+import pandas as pd
 
 app = FastAPI(title="Fraud Detection API")
+
+pipeline = joblib.load("models/fraud_pipeline.joblib")
 
 
 @app.get("/")
@@ -29,7 +33,11 @@ def sample_transaction():
 
 @app.post("/predict")
 def predict(data: dict):
+
+    df = pd.DataFrame([data])
+
+    prediction = pipeline.predict(df)[0]
+
     return {
-        "is_fraud": 0,
-        "note": "model not wired up yet"
+        "is_fraud": int(prediction)
     }
