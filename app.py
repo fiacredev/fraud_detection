@@ -6,12 +6,22 @@ app = FastAPI(title="Fraud Detection API")
 
 pipeline = joblib.load("models/fraud_pipeline.joblib")
 
+REQUIRED_FIELDS = [
+    "merchant", "category", "amt", "gender", "lat", "long",
+    "city_pop", "job", "unix_time", "merch_lat", "merch_long"
+]
+
 
 @app.get("/")
 def home():
     return {
         "message": "Fraud Detection API"
     }
+
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
 
 
 @app.get("/sample")
@@ -33,6 +43,10 @@ def sample_transaction():
 
 @app.post("/predict")
 def predict(data: dict):
+
+    missing = [f for f in REQUIRED_FIELDS if f not in data]
+    if missing:
+        return {"error": f"missing fields: {', '.join(missing)}"}
 
     df = pd.DataFrame([data])
 
