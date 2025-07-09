@@ -1,10 +1,21 @@
+import os
+
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
 
 app = FastAPI(title="Fraud Detection API")
 
-pipeline = joblib.load("models/fraud_pipeline.joblib")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+MODEL_PATH = os.getenv("MODEL_PATH", "models/fraud_pipeline.joblib")
+pipeline = joblib.load(MODEL_PATH)
 
 REQUIRED_FIELDS = [
     "merchant", "category", "amt", "gender", "lat", "long",
