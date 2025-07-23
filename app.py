@@ -1,11 +1,15 @@
 import os
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 import joblib
 import pandas as pd
 
-app = FastAPI(title="Fraud Detection API")
+app = FastAPI(
+    title="Fraud Detection API",
+    description="Score transactions for fraudulent activity in real time.",
+    version="1.0.0",
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -57,7 +61,10 @@ def predict(data: dict):
 
     missing = [f for f in REQUIRED_FIELDS if f not in data]
     if missing:
-        return {"error": f"missing fields: {', '.join(missing)}"}
+        raise HTTPException(
+            status_code=422,
+            detail=f"missing fields: {', '.join(missing)}",
+        )
 
     df = pd.DataFrame([data])
 
