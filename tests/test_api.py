@@ -30,8 +30,8 @@ def test_sample_payload_contains_required_fields():
 
 def test_predict_rejects_missing_fields():
     response = client.post("/predict", json={"amt": 10.0})
-    assert response.status_code == 200
-    assert "error" in response.json()
+    assert response.status_code == 422
+    assert "missing fields" in response.json()["detail"]
 
 
 def test_predict_scores_sample_transaction():
