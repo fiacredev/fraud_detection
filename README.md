@@ -3,17 +3,13 @@
 > A FastAPI service that scores transactions for fraud in real time, powered by
 > a scikit-learn pipeline exported with joblib.
 
-![Python](https://img.shields.io/badge/python-3.12-blue)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688)
-![License](https://img.shields.io/badge/license-MIT-green)
-
 ## Features
 
-- 🚀 Lightweight FastAPI service with automatic OpenAPI docs
-- 🤖 RandomForest pipeline with one-hot encoded categoricals
-- ✅ Input validation with clear `422` errors
-- 🧪 pytest suite covering every endpoint
-- 🐳 Docker & docker-compose ready
+Lightweight FastAPI service with automatic OpenAPI docs
+RandomForest pipeline with one-hot encoded categoricals
+Input validation with clear `422` errors
+pytest suite covering every endpoint
+Docker & docker-compose ready
 
 ## Quickstart
 
@@ -75,10 +71,6 @@ docker compose up --build
 ├── docker-compose.yml
 └── Makefile
 ```
-
-## License
-
-MIT — see [LICENSE](LICENSE).
 
 ## Author
 
