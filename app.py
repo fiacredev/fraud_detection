@@ -1,3 +1,5 @@
+"""Fraud Detection API — score transactions for fraudulent activity."""
+
 import os
 
 from fastapi import FastAPI, HTTPException
@@ -58,6 +60,7 @@ def sample_transaction():
 
 @app.post("/predict")
 def predict(data: dict):
+    """Score a single transaction and return a fraud flag."""
 
     missing = [f for f in REQUIRED_FIELDS if f not in data]
     if missing:
